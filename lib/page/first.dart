@@ -73,7 +73,7 @@ class _firstState extends State<first> {
                               children: [
                                 TextButton(
                                     style: TextButton.styleFrom(
-                                        primary: model.bluecolor,
+                                        foregroundColor: model.bluecolor,
                                         fixedSize: Size(120, 35),
                                         side:
                                             BorderSide(color: model.bluecolor),
@@ -91,7 +91,7 @@ class _firstState extends State<first> {
                                 //TODO
                                 TextButton(
                                     style: TextButton.styleFrom(
-                                        primary: model.whitecolor,
+                                        foregroundColor: model.whitecolor,
                                         backgroundColor: model.bluecolor,
                                         fixedSize: Size(120, 35),
                                         side:
@@ -124,7 +124,9 @@ class _firstState extends State<first> {
               icon: Icon(Icons.search)),
           PopupMenuButton(
             itemBuilder: (context) => [
-              PopupMenuItem(child: Text("Save as PDF")),
+              PopupMenuItem(
+                child: Text("Save as PDF"),
+              ),
               PopupMenuItem(child: Text("Save as Excel")),
             ],
           )
@@ -233,10 +235,13 @@ class _firstState extends State<first> {
                                                     ),
                                                     TextField(
                                                       cursorHeight: 30,
-                                                      cursorColor: model.orangecolor,
+                                                      cursorColor:
+                                                          model.orangecolor,
                                                       style: TextStyle(
-                                                          color: model.bluecolor),
-                                                      controller: editingController,
+                                                          color:
+                                                              model.bluecolor),
+                                                      controller:
+                                                          editingController,
                                                       decoration: InputDecoration(
                                                           focusedBorder:
                                                               UnderlineInputBorder(
@@ -268,8 +273,9 @@ class _firstState extends State<first> {
                                                       children: [
                                                         TextButton(
                                                             style: TextButton.styleFrom(
-                                                                primary: model
-                                                                    .bluecolor,
+                                                                foregroundColor:
+                                                                    model
+                                                                        .bluecolor,
                                                                 fixedSize: Size(
                                                                     120, 35),
                                                                 side: BorderSide(
@@ -292,8 +298,9 @@ class _firstState extends State<first> {
                                                         //TODO update data
                                                         TextButton(
                                                             style: TextButton.styleFrom(
-                                                                primary: model
-                                                                    .whitecolor,
+                                                                foregroundColor:
+                                                                    model
+                                                                        .whitecolor,
                                                                 backgroundColor:
                                                                     model
                                                                         .bluecolor,
@@ -311,13 +318,19 @@ class _firstState extends State<first> {
                                                               // editingController.text=model.t1.text;
                                                               var url = Uri.parse(
                                                                   'https://pdfile7.000webhostapp.com/ac_management/updatedata.php?id=${cl.id}&name=${editingController.text}');
-                                                              var response = await http.get(url);
+                                                              var response =
+                                                                  await http
+                                                                      .get(url);
                                                               print(
                                                                   "response = ${response.body}");
                                                               // editingController.clear();
-                                                              if (response.body.trim() =="Data is Update") {
-                                                                Navigator.pushReplacement(
-                                                                        context, MaterialPageRoute(
+                                                              if (response.body
+                                                                      .trim() ==
+                                                                  "Data is Update") {
+                                                                Navigator
+                                                                    .pushReplacement(
+                                                                        context,
+                                                                        MaterialPageRoute(
                                                                   builder:
                                                                       (context) {
                                                                     return first();
@@ -392,10 +405,16 @@ class _firstState extends State<first> {
                                                           onPressed: () async {
                                                             var url = Uri.parse(
                                                                 'https://pdfile7.000webhostapp.com/ac_management/deletedata.php?id=${cl.id}');
-                                                            var response = await http.get(url);
-                                                            print("response = ${response.body}");
-                                                            if (response.body.trim() == "Delete Data") {
-                                                              Navigator.pushReplacement(
+                                                            var response =
+                                                                await http
+                                                                    .get(url);
+                                                            print(
+                                                                "response = ${response.body}");
+                                                            if (response.body
+                                                                    .trim() ==
+                                                                "Delete Data") {
+                                                              Navigator
+                                                                  .pushReplacement(
                                                                       context,
                                                                       MaterialPageRoute(
                                                                         builder:
@@ -534,7 +553,7 @@ class _firstState extends State<first> {
                 children: [
                   TextButton(
                       style: TextButton.styleFrom(
-                          primary: model.bluecolor,
+                          foregroundColor: model.bluecolor,
                           fixedSize: Size(120, 35),
                           side: BorderSide(color: model.bluecolor),
                           shape: RoundedRectangleBorder(
@@ -551,7 +570,7 @@ class _firstState extends State<first> {
                   //TODO save data
                   TextButton(
                       style: TextButton.styleFrom(
-                          primary: model.whitecolor,
+                          foregroundColor: model.whitecolor,
                           backgroundColor: model.bluecolor,
                           fixedSize: Size(120, 35),
                           side: BorderSide(color: model.bluecolor),
