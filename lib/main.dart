@@ -1,0 +1,10 @@
+import 'package:flutter/material.dart';
+
+import 'page/splashscreen.dart';
+
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(MaterialApp(
+    home: splashscreen(),
+  ));
+}
