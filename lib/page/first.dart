@@ -43,11 +43,11 @@ class _firstState extends State<first> {
                             child: Center(
                               child: Text("Select account",
                                   style: TextStyle(
-                                      color: model.whitecolor, fontSize: 17)),
+                                      color: model.whiteColor, fontSize: 17)),
                             ),
                           ),
                           Ink(
-                            color: model.whitecolor,
+                            color: model.whiteColor,
                             height: 50,
                             width: double.infinity,
                             child: Center(
@@ -58,7 +58,7 @@ class _firstState extends State<first> {
                                     hintText: "Search account",
                                   ),
                                   style: TextStyle(
-                                      color: model.whitecolor, fontSize: 17)),
+                                      color: model.whiteColor, fontSize: 17)),
                             ),
                           ),
                           Expanded(
@@ -66,7 +66,7 @@ class _firstState extends State<first> {
                             color: Color(0xfff2f2f2),
                           )),
                           Ink(
-                            color: model.whitecolor,
+                            color: model.whiteColor,
                             height: 70,
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -91,7 +91,7 @@ class _firstState extends State<first> {
                                 //TODO
                                 TextButton(
                                     style: TextButton.styleFrom(
-                                        foregroundColor: model.whitecolor,
+                                        foregroundColor: model.whiteColor,
                                         backgroundColor: model.bluecolor,
                                         fixedSize: Size(120, 35),
                                         side:
@@ -110,7 +110,7 @@ class _firstState extends State<first> {
                                     },
                                     child: Text(
                                       "SAVE",
-                                      style: TextStyle(color: model.whitecolor),
+                                      style: TextStyle(color: model.whiteColor),
                                     )),
                               ],
                             ),
@@ -138,7 +138,7 @@ class _firstState extends State<first> {
               image: AssetImage("image/add.png"),
               width: 30,
               color: Colors.white),
-          backgroundColor: model.orangecolor,
+          backgroundColor: model.orangeColor,
           onPressed: () {
             dailog_box();
           },
@@ -179,7 +179,7 @@ class _firstState extends State<first> {
                             onTap: () {
                               Navigator.push(context, MaterialPageRoute(
                                 builder: (context) {
-                                  return editpage(cl.id, cl.name);
+                                  return editPage(cl.id, cl.name);
                                 },
                               ));
                             },
@@ -229,14 +229,14 @@ class _firstState extends State<first> {
                                                             "Add new account",
                                                             style: TextStyle(
                                                                 color: model
-                                                                    .whitecolor,
+                                                                    .whiteColor,
                                                                 fontSize: 17)),
                                                       ),
                                                     ),
                                                     TextField(
                                                       cursorHeight: 30,
                                                       cursorColor:
-                                                          model.orangecolor,
+                                                          model.orangeColor,
                                                       style: TextStyle(
                                                           color:
                                                               model.bluecolor),
@@ -247,21 +247,21 @@ class _firstState extends State<first> {
                                                               UnderlineInputBorder(
                                                                   borderSide: BorderSide(
                                                                       color: model
-                                                                          .orangecolor,
+                                                                          .orangeColor,
                                                                       width:
                                                                           2)),
                                                           enabledBorder:
                                                               UnderlineInputBorder(
                                                                   borderSide: BorderSide(
                                                                       color: model
-                                                                          .orangecolor)),
+                                                                          .orangeColor)),
                                                           labelText:
                                                               "Account name",
                                                           labelStyle: TextStyle(
                                                               color: model
-                                                                  .orangecolor),
+                                                                  .orangeColor),
                                                           fillColor: model
-                                                              .orangecolor),
+                                                              .orangeColor),
                                                     ),
                                                     SizedBox(
                                                       height: 20,
@@ -300,7 +300,7 @@ class _firstState extends State<first> {
                                                             style: TextButton.styleFrom(
                                                                 foregroundColor:
                                                                     model
-                                                                        .whitecolor,
+                                                                        .whiteColor,
                                                                 backgroundColor:
                                                                     model
                                                                         .bluecolor,
@@ -342,7 +342,7 @@ class _firstState extends State<first> {
                                                               "UPDATE",
                                                               style: TextStyle(
                                                                   color: model
-                                                                      .whitecolor),
+                                                                      .whiteColor),
                                                             )),
                                                       ],
                                                     ),
@@ -399,7 +399,7 @@ class _firstState extends State<first> {
                                                             "CANCEL",
                                                             style: TextStyle(
                                                                 color: model
-                                                                    .orangecolor),
+                                                                    .orangeColor),
                                                           )),
                                                       TextButton(
                                                           onPressed: () async {
@@ -427,7 +427,7 @@ class _firstState extends State<first> {
                                                             "DELETE",
                                                             style: TextStyle(
                                                                 color: model
-                                                                    .orangecolor),
+                                                                    .orangeColor),
                                                           )),
                                                     ],
                                                   )
@@ -453,7 +453,7 @@ class _firstState extends State<first> {
                                       width: 105,
                                       child: Center(
                                         child: Text(
-                                          "Creadit(↑)\n₹",
+                                          "Credit(↑)\n₹",
                                           textAlign: TextAlign.center,
                                         ),
                                       ),
@@ -481,10 +481,10 @@ class _firstState extends State<first> {
                                       width: 105,
                                       child: Center(
                                           child: Text(
-                                        "Balence\n₹0",
+                                        "Balance\n₹0",
                                         textAlign: TextAlign.center,
                                         style:
-                                            TextStyle(color: model.whitecolor),
+                                            TextStyle(color: model.whiteColor),
                                       )),
                                       decoration: BoxDecoration(
                                           color: model.bluecolor,
@@ -527,23 +527,23 @@ class _firstState extends State<first> {
                 width: double.infinity,
                 child: Center(
                   child: Text("Add new account",
-                      style: TextStyle(color: model.whitecolor, fontSize: 17)),
+                      style: TextStyle(color: model.whiteColor, fontSize: 17)),
                 ),
               ),
               TextField(
                 cursorHeight: 30,
-                cursorColor: model.orangecolor,
+                cursorColor: model.orangeColor,
                 style: TextStyle(color: model.bluecolor),
                 controller: model.t1,
                 decoration: InputDecoration(
                     focusedBorder: UnderlineInputBorder(
                         borderSide:
-                            BorderSide(color: model.orangecolor, width: 2)),
+                            BorderSide(color: model.orangeColor, width: 2)),
                     enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: model.orangecolor)),
+                        borderSide: BorderSide(color: model.orangeColor)),
                     labelText: "Account name",
-                    labelStyle: TextStyle(color: model.orangecolor),
-                    fillColor: model.orangecolor),
+                    labelStyle: TextStyle(color: model.orangeColor),
+                    fillColor: model.orangeColor),
               ),
               SizedBox(
                 height: 20,
@@ -570,7 +570,7 @@ class _firstState extends State<first> {
                   //TODO save data
                   TextButton(
                       style: TextButton.styleFrom(
-                          foregroundColor: model.whitecolor,
+                          foregroundColor: model.whiteColor,
                           backgroundColor: model.bluecolor,
                           fixedSize: Size(120, 35),
                           side: BorderSide(color: model.bluecolor),
@@ -595,7 +595,7 @@ class _firstState extends State<first> {
                       },
                       child: Text(
                         "SAVE",
-                        style: TextStyle(color: model.whitecolor),
+                        style: TextStyle(color: model.whiteColor),
                       )),
                 ],
               ),

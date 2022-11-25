@@ -5,22 +5,22 @@ import 'package:accmanagerbook/model.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-class editpage extends StatefulWidget {
+class editPage extends StatefulWidget {
   String? id;
   String? name;
 
-  editpage(this.id, this.name);
+  editPage(this.id, this.name);
 
   @override
-  State<editpage> createState() => _editpageState();
+  State<editPage> createState() => _editPageState();
 }
 
-class _editpageState extends State<editpage> {
+class _editPageState extends State<editPage> {
   // DateTime current_Date = DateTime(2022, 09, 29);
   // String date = "";
-  List userlist = [];
+  List userList = [];
   user_entry? ue;
-  int Credit = 0, Debit = 0, Balence = 0;
+  int Credit = 0, Debit = 0, Balance = 0;
   Color red = Color(0xffDC2024);
   Color green = Color(0xff21b389);
   TextEditingController up_date = TextEditingController();
@@ -33,7 +33,7 @@ class _editpageState extends State<editpage> {
         'https://pdfile7.000webhostapp.com/ac_management/user_view.php?id=${widget.id}');
     var response = await http.get(url);
     print("response = ${response.body}");
-    return userlist = jsonDecode(response.body);
+    return userList = jsonDecode(response.body);
   }
 
   method() async {
@@ -41,8 +41,8 @@ class _editpageState extends State<editpage> {
         'https://pdfile7.000webhostapp.com/ac_management/user_view.php?id=${widget.id}');
     var response = await http.get(url);
     print("response = ${response.body}");
-    userlist = jsonDecode(response.body);
-    userlist.forEach((element) {
+    userList = jsonDecode(response.body);
+    userList.forEach((element) {
       user_entry u = user_entry.fromJson(element);
 
       if (u.type == "credit") {
@@ -51,7 +51,7 @@ class _editpageState extends State<editpage> {
       if (u.type == "debit") {
         Debit = Debit + int.parse("${u.amount}");
       }
-      Balence = Credit - Debit;
+      Balance = Credit - Debit;
     });
     setState(() {});
   }
@@ -94,7 +94,7 @@ class _editpageState extends State<editpage> {
                 child: ColoredBox(
                   child: Center(
                     child: Text(
-                      "Creadit(↑)\n₹$Credit",
+                      "Credit(↑)\n₹$Credit",
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -116,9 +116,9 @@ class _editpageState extends State<editpage> {
                 child: ColoredBox(
                   child: Center(
                       child: Text(
-                    "Balence\n₹$Balence",
+                    "Balance\n₹$Balance",
                     textAlign: TextAlign.center,
-                    style: TextStyle(color: model.whitecolor),
+                    style: TextStyle(color: model.whiteColor),
                   )),
                   color: model.bluecolor,
                 ),
@@ -139,7 +139,7 @@ class _editpageState extends State<editpage> {
                     child: Text(
                         style: TextStyle(fontSize: 15),
                         textAlign: TextAlign.center,
-                        "Dete"),
+                        "Date"),
                   ),
                   Expanded(
                     child: Text(
@@ -168,13 +168,13 @@ class _editpageState extends State<editpage> {
                 if (snapshot.connectionState == ConnectionState.done) {
                   return ListView.builder(
                     shrinkWrap: true,
-                    itemCount: userlist.length,
+                    itemCount: userList.length,
                     itemBuilder: (context, index) {
-                      ue = user_entry.fromJson(userlist[index]);
+                      ue = user_entry.fromJson(userList[index]);
                       if (index % 2 == 1) {
-                        return datalist(Color(0xfff2f2f2));
+                        return dataList(Color(0xfff2f2f2));
                       } else {
-                        return datalist(Color(0xffffffff));
+                        return dataList(Color(0xffffffff));
                       }
                     },
                   );
@@ -191,7 +191,7 @@ class _editpageState extends State<editpage> {
     );
   }
 
-  datalist(Color c) {
+  dataList(Color c) {
     return Ink(
       height: 30,
       color: c,
@@ -236,7 +236,7 @@ class _editpageState extends State<editpage> {
                                           child: Text(
                                             "CANCEL",
                                             style: TextStyle(
-                                                color: model.orangecolor),
+                                                color: model.orangeColor),
                                           )),
                                       TextButton(
                                           onPressed: () async {
@@ -251,14 +251,14 @@ class _editpageState extends State<editpage> {
                                                   context,
                                                   MaterialPageRoute(
                                                       builder: (context) =>
-                                                          editpage(widget.id,
+                                                          editPage(widget.id,
                                                               widget.name)));
                                             }
                                           },
                                           child: Text(
                                             "DELETE",
                                             style: TextStyle(
-                                                color: model.orangecolor),
+                                                color: model.orangeColor),
                                           )),
                                     ],
                                   )
@@ -325,13 +325,13 @@ class _editpageState extends State<editpage> {
                     child: Center(
                       child: Text("Add transaction",
                           style:
-                              TextStyle(color: model.whitecolor, fontSize: 17)),
+                              TextStyle(color: model.whiteColor, fontSize: 17)),
                     ),
                   ),
                   TextField(
                     decoration:
-                        InputDecoration(hintText: "Enter transeation date"),
-                    controller: model.datecontroller,
+                        InputDecoration(hintText: "Enter transaction date"),
+                    controller: model.dateController,
                     // onTap: () {
                     //    showDatePicker(
                     //      // currentDate: DateTime.now(),
@@ -339,18 +339,18 @@ class _editpageState extends State<editpage> {
                     //       initialDate: current_Date,
                     //       firstDate: DateTime(1990),
                     //       lastDate: DateTime(2100));
-                    //   // print(newdate);
+                    //   // print(newDate);
                     //   setState(() {
                     //     date = current_Date.toString();
                     //   });
                     //   },
-                    cursorColor: model.orangecolor,
+                    cursorColor: model.orangeColor,
                     style: TextStyle(color: model.bluecolor),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Text("Teansection type:", style: TextStyle(fontSize: 10)),
+                      Text("transaction type:", style: TextStyle(fontSize: 10)),
                       Radio(
                         value: "credit",
                         groupValue: model.type,
@@ -378,33 +378,33 @@ class _editpageState extends State<editpage> {
                   TextField(
                     keyboardType: TextInputType.number,
                     cursorHeight: 25,
-                    cursorColor: model.orangecolor,
+                    cursorColor: model.orangeColor,
                     style: TextStyle(color: model.bluecolor),
-                    controller: model.particontroller,
+                    controller: model.partiController,
                     decoration: InputDecoration(
                       hintText: "Amount",
                       focusedBorder: UnderlineInputBorder(
                           borderSide:
-                              BorderSide(color: model.orangecolor, width: 2)),
+                              BorderSide(color: model.orangeColor, width: 2)),
                       enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: model.orangecolor)),
-                      labelStyle: TextStyle(color: model.orangecolor),
+                          borderSide: BorderSide(color: model.orangeColor)),
+                      labelStyle: TextStyle(color: model.orangeColor),
                     ),
                   ),
                   TextField(
                     cursorHeight: 25,
-                    cursorColor: model.orangecolor,
+                    cursorColor: model.orangeColor,
                     style: TextStyle(color: model.bluecolor),
-                    controller: model.amtcontroller,
+                    controller: model.amtController,
                     decoration: InputDecoration(
                         hintText: "Particular",
                         focusedBorder: UnderlineInputBorder(
                             borderSide:
-                                BorderSide(color: model.orangecolor, width: 2)),
+                                BorderSide(color: model.orangeColor, width: 2)),
                         enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: model.orangecolor)),
-                        labelStyle: TextStyle(color: model.orangecolor),
-                        fillColor: model.orangecolor),
+                            borderSide: BorderSide(color: model.orangeColor)),
+                        labelStyle: TextStyle(color: model.orangeColor),
+                        fillColor: model.orangeColor),
                   ),
                   SizedBox(
                     height: 10,
@@ -414,8 +414,7 @@ class _editpageState extends State<editpage> {
                     children: [
                       TextButton(
                           style: TextButton.styleFrom(
-                              primary: model.bluecolor,
-                              fixedSize: Size(120, 35),
+                              foregroundColor: model.bluecolor, fixedSize: Size(120, 35),
                               side: BorderSide(color: model.bluecolor),
                               shape: RoundedRectangleBorder(
                                   borderRadius:
@@ -430,18 +429,17 @@ class _editpageState extends State<editpage> {
                       //TODO save
                       TextButton(
                           style: TextButton.styleFrom(
-                              primary: model.whitecolor,
-                              backgroundColor: model.bluecolor,
+                              foregroundColor: model.whiteColor, backgroundColor: model.bluecolor,
                               fixedSize: Size(120, 35),
                               side: BorderSide(color: model.bluecolor),
                               shape: RoundedRectangleBorder(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(40)))),
                           onPressed: () async {
-                            String date = model.datecontroller.text;
+                            String date = model.dateController.text;
                             String radio = model.type;
-                            String amt = model.amtcontroller.text;
-                            String par = model.particontroller.text;
+                            String amt = model.amtController.text;
+                            String par = model.partiController.text;
 
                             var url = Uri.https('pdfile7.000webhostapp.com',
                                 'ac_management/user_insert.php');
@@ -458,18 +456,18 @@ class _editpageState extends State<editpage> {
                               Navigator.pushReplacement(context,
                                   MaterialPageRoute(
                                 builder: (context) {
-                                  return editpage(widget.id, widget.name);
+                                  return editPage(widget.id, widget.name);
                                 },
                               ));
                             }
-                            model.datecontroller.clear();
+                            model.dateController.clear();
                             model.type = "";
-                            model.amtcontroller.clear();
-                            model.particontroller.clear();
+                            model.amtController.clear();
+                            model.partiController.clear();
                           },
                           child: Text(
                             "Add",
-                            style: TextStyle(color: model.whitecolor),
+                            style: TextStyle(color: model.whiteColor),
                           )),
                     ],
                   ),
@@ -504,12 +502,12 @@ class _editpageState extends State<editpage> {
                     child: Center(
                       child: Text("Update transaction",
                           style:
-                              TextStyle(color: model.whitecolor, fontSize: 17)),
+                              TextStyle(color: model.whiteColor, fontSize: 17)),
                     ),
                   ),
                   TextField(
                     decoration:
-                        InputDecoration(hintText: "Enter transeation date"),
+                        InputDecoration(hintText: "Enter transaction date"),
                     controller: up_date,
                     // onTap: () {
                     //    showDatePicker(
@@ -518,21 +516,21 @@ class _editpageState extends State<editpage> {
                     //       initialDate: current_Date,
                     //       firstDate: DateTime(1990),
                     //       lastDate: DateTime(2100));
-                    //   // print(newdate);
+                    //   // print(newDate);
                     //   setState(() {
                     //     date = current_Date.toString();
                     //   });
                     //   },
-                    cursorColor: model.orangecolor,
+                    cursorColor: model.orangeColor,
                     style: TextStyle(color: model.bluecolor),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Text("Teansection type:", style: TextStyle(fontSize: 10)),
+                      Text("transaction type:", style: TextStyle(fontSize: 10)),
                       Radio(
                         value: "credit",
-                        fillColor: MaterialStateProperty.all(model.orangecolor),
+                        fillColor: MaterialStateProperty.all(model.orangeColor),
                         groupValue: type1,
                         onChanged: (value) {
                           setState1(() {
@@ -544,7 +542,7 @@ class _editpageState extends State<editpage> {
                       Text("Credit", style: TextStyle(fontSize: 13)),
                       Radio(
                         value: "debit",
-                        fillColor: MaterialStateProperty.all(model.orangecolor),
+                        fillColor: MaterialStateProperty.all(model.orangeColor),
                         groupValue: type1,
                         onChanged: (value) {
                           setState1(() {
@@ -559,33 +557,33 @@ class _editpageState extends State<editpage> {
                   TextField(
                     keyboardType: TextInputType.number,
                     cursorHeight: 25,
-                    cursorColor: model.orangecolor,
+                    cursorColor: model.orangeColor,
                     style: TextStyle(color: model.bluecolor),
                     controller: up_amt,
                     decoration: InputDecoration(
                       hintText: "Amount",
                       focusedBorder: UnderlineInputBorder(
                           borderSide:
-                              BorderSide(color: model.orangecolor, width: 2)),
+                              BorderSide(color: model.orangeColor, width: 2)),
                       enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: model.orangecolor)),
-                      labelStyle: TextStyle(color: model.orangecolor),
+                          borderSide: BorderSide(color: model.orangeColor)),
+                      labelStyle: TextStyle(color: model.orangeColor),
                     ),
                   ),
                   TextField(
                     cursorHeight: 25,
-                    cursorColor: model.orangecolor,
+                    cursorColor: model.orangeColor,
                     style: TextStyle(color: model.bluecolor),
                     controller: up_part,
                     decoration: InputDecoration(
                         hintText: "Particular",
                         focusedBorder: UnderlineInputBorder(
                             borderSide:
-                                BorderSide(color: model.orangecolor, width: 2)),
+                                BorderSide(color: model.orangeColor, width: 2)),
                         enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: model.orangecolor)),
-                        labelStyle: TextStyle(color: model.orangecolor),
-                        fillColor: model.orangecolor),
+                            borderSide: BorderSide(color: model.orangeColor)),
+                        labelStyle: TextStyle(color: model.orangeColor),
+                        fillColor: model.orangeColor),
                   ),
                   SizedBox(
                     height: 10,
@@ -595,8 +593,7 @@ class _editpageState extends State<editpage> {
                     children: [
                       TextButton(
                           style: TextButton.styleFrom(
-                              primary: model.bluecolor,
-                              fixedSize: Size(120, 35),
+                              foregroundColor: model.bluecolor, fixedSize: Size(120, 35),
                               side: BorderSide(color: model.bluecolor),
                               shape: RoundedRectangleBorder(
                                   borderRadius:
@@ -611,8 +608,7 @@ class _editpageState extends State<editpage> {
                       //TODO save
                       TextButton(
                           style: TextButton.styleFrom(
-                              primary: model.whitecolor,
-                              backgroundColor: model.bluecolor,
+                              foregroundColor: model.whiteColor, backgroundColor: model.bluecolor,
                               fixedSize: Size(120, 35),
                               side: BorderSide(color: model.bluecolor),
                               shape: RoundedRectangleBorder(
@@ -633,14 +629,14 @@ class _editpageState extends State<editpage> {
                               Navigator.pushReplacement(context,
                                   MaterialPageRoute(
                                 builder: (context) {
-                                  return editpage(widget.id, widget.name);
+                                  return editPage(widget.id, widget.name);
                                 },
                               ));
                             }
                           },
                           child: Text(
                             "Update",
-                            style: TextStyle(color: model.whitecolor),
+                            style: TextStyle(color: model.whiteColor),
                           )),
                     ],
                   ),
