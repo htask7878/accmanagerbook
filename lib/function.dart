@@ -25,7 +25,7 @@ Future viewdata1() async {
   print("response = ${response.body}");
   return model.map = jsonDecode(response.body);
 }
- viewjoindata() async {
+ viewJoInData() async {
   var url =
   Uri.parse('https://pdfile7.000webhostapp.com/ac_management/viewjoindata.php');
   var response = await http.get(url);
@@ -33,7 +33,7 @@ Future viewdata1() async {
   return model.map = jsonDecode(response.body);
 }
 
-deletedata() async {
+deleteData() async {
   var url = Uri.parse(
       'https://pdfile7.000webhostapp.com/ac_management/deletedata.php?id=');
   var response = await http.get(url);
@@ -43,13 +43,13 @@ deletedata() async {
   }
 }
 
-//todo useraccount function
+//todo userAccount function
 //('https://pdfile7.000webhostapp.com/ac_management/user_insert.php?')
 // user_insert() async {
-//   String date = model.datecontroller.text;
+//   String date = model.dateController.text;
 //   String radio=model.type;
-//   String amt=model.amtcontroller.text;
-//   String par=model.particontroller.text;
+//   String amt=model.amtController.text;
+//   String par=model.partiController.text;
 //
 //   var url =
 //       Uri.https('pdfile7.000webhostapp.com', 'ac_management/user_insert.php');

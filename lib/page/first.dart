@@ -18,7 +18,7 @@ class _firstState extends State<first> {
   @override
   void initState() {
     super.initState();
-    viewjoindata();
+    viewJoInData();
   }
 
   @override
