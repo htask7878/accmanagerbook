@@ -1,28 +1,29 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:accmanagerbook/class/user_entry.dart';
 import 'package:accmanagerbook/model.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-class editPage extends StatefulWidget {
+class EditPage extends StatefulWidget {
   String? id;
   String? name;
 
-  editPage(this.id, this.name);
+  EditPage(this.id, this.name, {super.key});
 
   @override
-  State<editPage> createState() => _editPageState();
+  State<EditPage> createState() => _EditPageState();
 }
 
-class _editPageState extends State<editPage> {
+class _EditPageState extends State<EditPage> {
   // DateTime current_Date = DateTime(2022, 09, 29);
   // String date = "";
   List userList = [];
   user_entry? ue;
   int Credit = 0, Debit = 0, Balance = 0;
-  Color red = Color(0xffDC2024);
-  Color green = Color(0xff21b389);
+  Color red = const Color(0xffDC2024);
+  Color green = const Color(0xff21b389);
   TextEditingController up_date = TextEditingController();
   TextEditingController up_amt = TextEditingController();
   TextEditingController up_part = TextEditingController();
@@ -74,10 +75,10 @@ class _editPageState extends State<editPage> {
                   onPressed: () {
                     add_data();
                   },
-                  icon: Icon(Icons.save_outlined)),
+                  icon: const Icon(Icons.save_outlined)),
               IconButton(onPressed: () {}, icon: Icon(Icons.search)),
               PopupMenuButton(
-                itemBuilder: (context) => [
+                itemBuilder: (context) => const [
                   PopupMenuItem(child: Text("Save as PDF")),
                   PopupMenuItem(child: Text("Save as Excel")),
                   PopupMenuItem(child: Text("Share the app")),
@@ -92,35 +93,35 @@ class _editPageState extends State<editPage> {
             children: [
               Expanded(
                 child: ColoredBox(
+                  color: const Color(0xfff8f3f7),
                   child: Center(
                     child: Text(
                       "Credit(↑)\n₹$Credit",
                       textAlign: TextAlign.center,
                     ),
                   ),
-                  color: Color(0xfff8f3f7),
                 ),
               ),
               Expanded(
                 child: ColoredBox(
+                  color: const Color(0xffe5e3e6),
                   child: Center(
                     child: Text(
                       "Debit(↓)\n₹$Debit",
                       textAlign: TextAlign.center,
                     ),
                   ),
-                  color: Color(0xffe5e3e6),
                 ),
               ),
               Expanded(
                 child: ColoredBox(
+                  color: model.bluecolor,
                   child: Center(
                       child: Text(
                     "Balance\n₹$Balance",
                     textAlign: TextAlign.center,
                     style: TextStyle(color: model.whiteColor),
                   )),
-                  color: model.bluecolor,
                 ),
               ),
             ],
@@ -134,7 +135,7 @@ class _editPageState extends State<editPage> {
               color: Colors.grey[200],
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
+                children: const [
                   Expanded(
                     child: Text(
                         style: TextStyle(fontSize: 15),
@@ -179,7 +180,7 @@ class _editPageState extends State<editPage> {
                     },
                   );
                 } else {
-                  return Center(
+                  return const Center(
                     child: CircularProgressIndicator(),
                   );
                 }
@@ -199,7 +200,7 @@ class _editPageState extends State<editPage> {
         onTap: () {
           PopupMenuButton(
               color: Colors.green,
-              child: Text("Hardik"),
+              child: const Text("Hardik"),
               itemBuilder: (context) => [
                     PopupMenuItem(
                         value: 1,
@@ -207,22 +208,22 @@ class _editPageState extends State<editPage> {
                           update_data();
                           Navigator.pop(context);
                         },
-                        child: Text("Edit")),
+                        child: const Text("Edit")),
                     PopupMenuItem(
                         value: 2,
                         onTap: () {
-                          print("Hardik");
+                          log("Hardik");
                           showDialog(
                             // useSafeArea: true,
                             context: context,
                             builder: (context) {
-                              print("Utsav");
+                              log("Utsav");
                               return SimpleDialog(
-                                title: Text(
+                                title: const Text(
                                   "Are you sure?",
                                 ),
                                 children: [
-                                  Center(
+                                  const Center(
                                       child: Text(
                                           textAlign: TextAlign.start,
                                           "You want to  delete this transaction")),
@@ -243,15 +244,14 @@ class _editPageState extends State<editPage> {
                                             var url = Uri.parse(
                                                 'https://pdfile7.000webhostapp.com/ac_management/user_delete.php?id=${ue!.id}');
                                             var response = await http.get(url);
-                                            print(
-                                                "response = ${response.body}");
+                                            log("response = ${response.body}");
                                             if (response.body.trim() ==
                                                 "Delete Data") {
                                               Navigator.pushReplacement(
                                                   context,
                                                   MaterialPageRoute(
                                                       builder: (context) =>
-                                                          editPage(widget.id,
+                                                          EditPage(widget.id,
                                                               widget.name)));
                                             }
                                           },
@@ -268,7 +268,7 @@ class _editPageState extends State<editPage> {
                           );
                           Navigator.pop(context);
                         },
-                        child: Text("Delete")),
+                        child: const Text("Delete")),
                   ]);
         },
         child: Row(
@@ -329,8 +329,8 @@ class _editPageState extends State<editPage> {
                     ),
                   ),
                   TextField(
-                    decoration:
-                        InputDecoration(hintText: "Enter transaction date"),
+                    decoration: const InputDecoration(
+                        hintText: "Enter transaction date"),
                     controller: model.dateController,
                     // onTap: () {
                     //    showDatePicker(
@@ -350,29 +350,30 @@ class _editPageState extends State<editPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Text("transaction type:", style: TextStyle(fontSize: 10)),
+                      const Text("transaction type:",
+                          style: TextStyle(fontSize: 10)),
                       Radio(
                         value: "credit",
                         groupValue: model.type,
                         onChanged: (value) {
                           setState1(() {
                             model.type = value.toString();
-                            print("${model.type}");
+                            log(model.type);
                           });
                         },
                       ),
-                      Text("Credit", style: TextStyle(fontSize: 13)),
+                      const Text("Credit", style: TextStyle(fontSize: 13)),
                       Radio(
                         value: "debit",
                         groupValue: model.type,
                         onChanged: (value) {
                           setState1(() {
                             model.type = value.toString();
-                            print("${model.type}");
+                            log(model.type);
                           });
                         },
                       ),
-                      Text("Debit", style: TextStyle(fontSize: 13)),
+                      const Text("Debit", style: TextStyle(fontSize: 13)),
                     ],
                   ),
                   TextField(
@@ -406,7 +407,7 @@ class _editPageState extends State<editPage> {
                         labelStyle: TextStyle(color: model.orangeColor),
                         fillColor: model.orangeColor),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Row(
@@ -414,9 +415,10 @@ class _editPageState extends State<editPage> {
                     children: [
                       TextButton(
                           style: TextButton.styleFrom(
-                              foregroundColor: model.bluecolor, fixedSize: Size(120, 35),
+                              foregroundColor: model.bluecolor,
+                              fixedSize: const Size(120, 35),
                               side: BorderSide(color: model.bluecolor),
-                              shape: RoundedRectangleBorder(
+                              shape: const RoundedRectangleBorder(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(40)))),
                           onPressed: () {
@@ -429,10 +431,11 @@ class _editPageState extends State<editPage> {
                       //TODO save
                       TextButton(
                           style: TextButton.styleFrom(
-                              foregroundColor: model.whiteColor, backgroundColor: model.bluecolor,
-                              fixedSize: Size(120, 35),
+                              foregroundColor: model.whiteColor,
+                              backgroundColor: model.bluecolor,
+                              fixedSize: const Size(120, 35),
                               side: BorderSide(color: model.bluecolor),
-                              shape: RoundedRectangleBorder(
+                              shape: const RoundedRectangleBorder(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(40)))),
                           onPressed: () async {
@@ -451,12 +454,12 @@ class _editPageState extends State<editPage> {
                               'cl_id': widget.id,
                             });
 
-                            print("response = ${response.body}");
+                            log("response = ${response.body}");
                             if (response.body == "data insert") {
                               Navigator.pushReplacement(context,
                                   MaterialPageRoute(
                                 builder: (context) {
-                                  return editPage(widget.id, widget.name);
+                                  return EditPage(widget.id, widget.name);
                                 },
                               ));
                             }
@@ -506,8 +509,8 @@ class _editPageState extends State<editPage> {
                     ),
                   ),
                   TextField(
-                    decoration:
-                        InputDecoration(hintText: "Enter transaction date"),
+                    decoration: const InputDecoration(
+                        hintText: "Enter transaction date"),
                     controller: up_date,
                     // onTap: () {
                     //    showDatePicker(
@@ -527,7 +530,8 @@ class _editPageState extends State<editPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Text("transaction type:", style: TextStyle(fontSize: 10)),
+                      const Text("transaction type:",
+                          style: TextStyle(fontSize: 10)),
                       Radio(
                         value: "credit",
                         fillColor: MaterialStateProperty.all(model.orangeColor),
@@ -535,11 +539,11 @@ class _editPageState extends State<editPage> {
                         onChanged: (value) {
                           setState1(() {
                             type1 = value.toString();
-                            print("${type1}");
+                            log(type1);
                           });
                         },
                       ),
-                      Text("Credit", style: TextStyle(fontSize: 13)),
+                      const Text("Credit", style: TextStyle(fontSize: 13)),
                       Radio(
                         value: "debit",
                         fillColor: MaterialStateProperty.all(model.orangeColor),
@@ -547,11 +551,11 @@ class _editPageState extends State<editPage> {
                         onChanged: (value) {
                           setState1(() {
                             type1 = value.toString();
-                            print("${type1}");
+                            log(type1);
                           });
                         },
                       ),
-                      Text("Debit", style: TextStyle(fontSize: 13)),
+                      const Text("Debit", style: TextStyle(fontSize: 13)),
                     ],
                   ),
                   TextField(
@@ -585,7 +589,7 @@ class _editPageState extends State<editPage> {
                         labelStyle: TextStyle(color: model.orangeColor),
                         fillColor: model.orangeColor),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Row(
@@ -593,9 +597,10 @@ class _editPageState extends State<editPage> {
                     children: [
                       TextButton(
                           style: TextButton.styleFrom(
-                              foregroundColor: model.bluecolor, fixedSize: Size(120, 35),
+                              foregroundColor: model.bluecolor,
+                              fixedSize: const Size(120, 35),
                               side: BorderSide(color: model.bluecolor),
-                              shape: RoundedRectangleBorder(
+                              shape: const RoundedRectangleBorder(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(40)))),
                           onPressed: () {
@@ -608,10 +613,11 @@ class _editPageState extends State<editPage> {
                       //TODO save
                       TextButton(
                           style: TextButton.styleFrom(
-                              foregroundColor: model.whiteColor, backgroundColor: model.bluecolor,
-                              fixedSize: Size(120, 35),
+                              foregroundColor: model.whiteColor,
+                              backgroundColor: model.bluecolor,
+                              fixedSize: const Size(120, 35),
                               side: BorderSide(color: model.bluecolor),
-                              shape: RoundedRectangleBorder(
+                              shape: const RoundedRectangleBorder(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(40)))),
                           onPressed: () async {
@@ -629,7 +635,7 @@ class _editPageState extends State<editPage> {
                               Navigator.pushReplacement(context,
                                   MaterialPageRoute(
                                 builder: (context) {
-                                  return editPage(widget.id, widget.name);
+                                  return EditPage(widget.id, widget.name);
                                 },
                               ));
                             }

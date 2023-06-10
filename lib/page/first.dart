@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:accmanagerbook/class/client.dart';
 import 'package:accmanagerbook/page/editpage.dart';
 import 'package:accmanagerbook/function.dart';
@@ -5,14 +7,14 @@ import 'package:accmanagerbook/model.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-class first extends StatefulWidget {
-  const first({Key? key}) : super(key: key);
+class First extends StatefulWidget {
+  const First({Key? key}) : super(key: key);
 
   @override
-  State<first> createState() => _firstState();
+  State<First> createState() => _FirstState();
 }
 
-class _firstState extends State<first> {
+class _FirstState extends State<First> {
   TextEditingController editingController = TextEditingController();
 
   @override
@@ -26,7 +28,7 @@ class _firstState extends State<first> {
     return SafeArea(
       top: true,
       child: Scaffold(
-        backgroundColor: Color(0xffdfdfdf),
+        backgroundColor: const Color(0xffdfdfdf),
         appBar: AppBar(actions: [
           IconButton(
               onPressed: () {
@@ -53,7 +55,7 @@ class _firstState extends State<first> {
                             child: Center(
                               child: TextField(
                                   controller: model.search_controller,
-                                  decoration: InputDecoration(
+                                  decoration: const InputDecoration(
                                     prefixIcon: Icon(Icons.search),
                                     hintText: "Search account",
                                   ),
@@ -63,7 +65,7 @@ class _firstState extends State<first> {
                           ),
                           Expanded(
                               child: Ink(
-                            color: Color(0xfff2f2f2),
+                            color: const Color(0xfff2f2f2),
                           )),
                           Ink(
                             color: model.whiteColor,
@@ -74,10 +76,10 @@ class _firstState extends State<first> {
                                 TextButton(
                                     style: TextButton.styleFrom(
                                         foregroundColor: model.bluecolor,
-                                        fixedSize: Size(120, 35),
+                                        fixedSize: const Size(120, 35),
                                         side:
                                             BorderSide(color: model.bluecolor),
-                                        shape: RoundedRectangleBorder(
+                                        shape: const RoundedRectangleBorder(
                                             borderRadius: BorderRadius.all(
                                                 Radius.circular(40)))),
                                     onPressed: () {
@@ -93,16 +95,16 @@ class _firstState extends State<first> {
                                     style: TextButton.styleFrom(
                                         foregroundColor: model.whiteColor,
                                         backgroundColor: model.bluecolor,
-                                        fixedSize: Size(120, 35),
+                                        fixedSize: const Size(120, 35),
                                         side:
                                             BorderSide(color: model.bluecolor),
-                                        shape: RoundedRectangleBorder(
+                                        shape: const RoundedRectangleBorder(
                                             borderRadius: BorderRadius.all(
                                                 Radius.circular(40)))),
                                     onPressed: () {
                                       // Navigator.pushReplacement(context, MaterialPageRoute(
                                       //   builder: (context) {
-                                      //     return first();
+                                      //     return First();
                                       //   },
                                       // ));
                                       // setState(() {});
@@ -121,27 +123,27 @@ class _firstState extends State<first> {
                   },
                 );
               },
-              icon: Icon(Icons.search)),
+              icon: const Icon(Icons.search)),
           PopupMenuButton(
-            itemBuilder: (context) => [
+            itemBuilder: (context) => const [
               PopupMenuItem(
                 child: Text("Save as PDF"),
               ),
               PopupMenuItem(child: Text("Save as Excel")),
             ],
           )
-        ], backgroundColor: model.bluecolor, title: Text("Dashboard")),
-        drawer: Drawer(width: 250),
+        ], backgroundColor: model.bluecolor, title: const Text("Dashboard")),
+        drawer: const Drawer(width: 250),
         floatingActionButton: FloatingActionButton(
           mini: true,
-          child: Image(
-              image: AssetImage("image/add.png"),
-              width: 30,
-              color: Colors.white),
           backgroundColor: model.orangeColor,
           onPressed: () {
             dailog_box();
           },
+          child: const Image(
+              image: AssetImage("image/add.png"),
+              width: 30,
+              color: Colors.white),
         ),
         body: FutureBuilder(
           future: viewdata1(),
@@ -155,7 +157,7 @@ class _firstState extends State<first> {
                           child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(Icons.warning,
+                          const Icon(Icons.warning,
                               color: Color(0xffdd536c), size: 100),
                           Text("NO ACCOUNT ADDED",
                               style: TextStyle(
@@ -168,9 +170,9 @@ class _firstState extends State<first> {
                         ],
                       )),
                     )
-                  : Container(
-                      margin: EdgeInsets.only(right: 6, left: 6),
-                      child: ListView.builder(
+                  : Padding(
+                    padding: const EdgeInsets.only(left: 10,right: 10),
+                    child: ListView.builder(
                         itemCount: list.length,
                         itemBuilder: (context, index) {
                           client cl = client.fromJson(list[index]);
@@ -179,112 +181,224 @@ class _firstState extends State<first> {
                             onTap: () {
                               Navigator.push(context, MaterialPageRoute(
                                 builder: (context) {
-                                  return editPage(cl.id, cl.name);
+                                  return EditPage(cl.id, cl.name);
                                 },
                               ));
                             },
                             child: Container(
-                              decoration: BoxDecoration(
+                              margin: const EdgeInsets.only(top: 10),
+                              padding:const EdgeInsets.only(bottom: 10,top: 5),
+                              decoration: const BoxDecoration(
                                   color: Color(0xffffffff),
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(7))),
-                              margin: EdgeInsets.only(top: 9, bottom: 9),
-                              child: Column(children: [
-                                Row(
-                                  children: [
-                                    Expanded(
-                                      child: Text("${cl.name}",
-                                          style: TextStyle(
-                                              fontSize: 22,
-                                              fontWeight: FontWeight.w400)),
-                                    ),
-                                    Container(
-                                      height: 37,
-                                      width: 37,
-                                      margin: EdgeInsets.only(
-                                          top: 2, bottom: 2, left: 4, right: 5),
-                                      decoration: BoxDecoration(
-                                          border: Border.all(
-                                              color: Color(0xffE0E0E0),
-                                              width: 1.5),
-                                          borderRadius:
-                                              BorderRadius.circular(20)),
-                                      child: IconButton(
-                                        onPressed: () {
-                                          editingController.text = cl.name!;
-                                          showDialog(
-                                            barrierDismissible: false,
-                                            context: context,
-                                            builder: (context) {
-                                              return Dialog(
-                                                child: SizedBox(
-                                                  height: 200,
-                                                  child: Column(children: [
-                                                    Ink(
-                                                      color: model.bluecolor,
-                                                      height: 50,
-                                                      width: double.infinity,
-                                                      child: Center(
-                                                        child: Text(
-                                                            "Add new account",
-                                                            style: TextStyle(
-                                                                color: model
-                                                                    .whiteColor,
-                                                                fontSize: 17)),
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 15,right: 15),
+                                child: Column(children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Expanded(
+                                        child: Text("${cl.name}",
+                                            style: const TextStyle(
+                                                fontSize: 22,
+                                                fontWeight: FontWeight.w400)),
+                                      ),
+                                      Container(
+                                        height: 37,
+                                        width: 37,
+                                        margin: const EdgeInsets.only(
+                                            top: 2, bottom: 2, left: 4, right: 5),
+                                        decoration: BoxDecoration(
+                                            border: Border.all(
+                                                color: const Color(0xffE0E0E0),
+                                                width: 1.5),
+                                            borderRadius:
+                                                BorderRadius.circular(20)),
+                                        child: IconButton(
+                                          onPressed: () {
+                                            editingController.text = cl.name!;
+                                            showDialog(
+                                              barrierDismissible: false,
+                                              context: context,
+                                              builder: (context) {
+                                                return Dialog(
+                                                  child: SizedBox(
+                                                    height: 200,
+                                                    child: Column(children: [
+                                                      Ink(
+                                                        color: model.bluecolor,
+                                                        height: 50,
+                                                        width: double.infinity,
+                                                        child: Center(
+                                                          child: Text(
+                                                              "Add new account",
+                                                              style: TextStyle(
+                                                                  color: model
+                                                                      .whiteColor,
+                                                                  fontSize: 17)),
+                                                        ),
                                                       ),
-                                                    ),
-                                                    TextField(
-                                                      cursorHeight: 30,
-                                                      cursorColor:
-                                                          model.orangeColor,
-                                                      style: TextStyle(
-                                                          color:
-                                                              model.bluecolor),
-                                                      controller:
-                                                          editingController,
-                                                      decoration: InputDecoration(
-                                                          focusedBorder:
-                                                              UnderlineInputBorder(
-                                                                  borderSide: BorderSide(
+                                                      TextField(
+                                                        cursorHeight: 30,
+                                                        cursorColor:
+                                                            model.orangeColor,
+                                                        style: TextStyle(
+                                                            color: model.bluecolor),
+                                                        controller:
+                                                            editingController,
+                                                        decoration: InputDecoration(
+                                                            focusedBorder:
+                                                                UnderlineInputBorder(
+                                                                    borderSide: BorderSide(
+                                                                        color: model
+                                                                            .orangeColor,
+                                                                        width: 2)),
+                                                            enabledBorder:
+                                                                UnderlineInputBorder(
+                                                                    borderSide:
+                                                                        BorderSide(
+                                                                            color:
+                                                                                model
+                                                                                    .orangeColor)),
+                                                            labelText:
+                                                                "Account name",
+                                                            labelStyle: TextStyle(
+                                                                color: model
+                                                                    .orangeColor),
+                                                            fillColor:
+                                                                model.orangeColor),
+                                                      ),
+                                                      const SizedBox(
+                                                        height: 20,
+                                                      ),
+                                                      Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceEvenly,
+                                                        children: [
+                                                          TextButton(
+                                                              style: TextButton.styleFrom(
+                                                                  foregroundColor:
+                                                                      model
+                                                                          .bluecolor,
+                                                                  fixedSize:
+                                                                      const Size(
+                                                                          120, 35),
+                                                                  side: BorderSide(
                                                                       color: model
-                                                                          .orangeColor,
-                                                                      width:
-                                                                          2)),
-                                                          enabledBorder:
-                                                              UnderlineInputBorder(
-                                                                  borderSide: BorderSide(
-                                                                      color: model
-                                                                          .orangeColor)),
-                                                          labelText:
-                                                              "Account name",
-                                                          labelStyle: TextStyle(
-                                                              color: model
-                                                                  .orangeColor),
-                                                          fillColor: model
-                                                              .orangeColor),
-                                                    ),
-                                                    SizedBox(
-                                                      height: 20,
-                                                    ),
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceEvenly,
-                                                      children: [
-                                                        TextButton(
-                                                            style: TextButton.styleFrom(
-                                                                foregroundColor:
-                                                                    model
-                                                                        .bluecolor,
-                                                                fixedSize: Size(
-                                                                    120, 35),
-                                                                side: BorderSide(
+                                                                          .bluecolor),
+                                                                  shape: const RoundedRectangleBorder(
+                                                                      borderRadius:
+                                                                          BorderRadius.all(
+                                                                              Radius.circular(
+                                                                                  40)))),
+                                                              onPressed: () {
+                                                                Navigator.pop(
+                                                                    context);
+                                                              },
+                                                              child: Text(
+                                                                "CANCEL",
+                                                                style: TextStyle(
                                                                     color: model
                                                                         .bluecolor),
-                                                                shape: RoundedRectangleBorder(
-                                                                    borderRadius:
-                                                                        BorderRadius.all(
-                                                                            Radius.circular(40)))),
+                                                              )),
+                                                          //TODO update data
+                                                          TextButton(
+                                                              style: TextButton.styleFrom(
+                                                                  foregroundColor:
+                                                                      model
+                                                                          .whiteColor,
+                                                                  backgroundColor:
+                                                                      model
+                                                                          .bluecolor,
+                                                                  fixedSize:
+                                                                      const Size(
+                                                                          120, 35),
+                                                                  side: BorderSide(
+                                                                      color: model
+                                                                          .bluecolor),
+                                                                  shape: const RoundedRectangleBorder(
+                                                                      borderRadius:
+                                                                          BorderRadius.all(
+                                                                              Radius.circular(
+                                                                                  40)))),
+                                                              onPressed: () async {
+                                                                // editingController.text=model.t1.text;
+                                                                var url = Uri.parse(
+                                                                    'https://pdfile7.000webhostapp.com/ac_management/updatedata.php?id=${cl.id}&name=${editingController.text}');
+                                                                var response =
+                                                                    await http
+                                                                        .get(url);
+                                                                log("response = ${response.body}");
+                                                                // editingController.clear();
+                                                                if (response.body
+                                                                        .trim() ==
+                                                                    "Data is Update") {
+                                                                  Navigator
+                                                                      .pushReplacement(
+                                                                          context,
+                                                                          MaterialPageRoute(
+                                                                    builder:
+                                                                        (context) {
+                                                                      return const First();
+                                                                    },
+                                                                  ));
+                                                                }
+                                                              },
+                                                              child: Text(
+                                                                "UPDATE",
+                                                                style: TextStyle(
+                                                                    color: model
+                                                                        .whiteColor),
+                                                              )),
+                                                        ],
+                                                      ),
+                                                    ]),
+                                                  ),
+                                                );
+                                              },
+                                            );
+                                          },
+                                          icon: ImageIcon(
+                                              size: 25,
+                                              const AssetImage("image/update.png"),
+                                              color: model.bluecolor),
+                                        ),
+                                      ),
+                                      Container(
+                                        height: 37,
+                                        width: 37,
+                                        margin: const EdgeInsets.only(
+                                            top: 2, bottom: 2, left: 4,),
+                                        decoration: BoxDecoration(
+                                            border: Border.all(
+                                                color: const Color(0xffE0E0E0),
+                                                width: 1.5),
+                                            borderRadius:
+                                                BorderRadius.circular(20)),
+                                        child: IconButton(
+                                          onPressed: () {
+                                            showDialog(
+                                              context: context,
+                                              builder: (context) {
+                                                return SimpleDialog(
+                                                  title: Text(
+                                                    "Are you sure?",
+                                                    style: TextStyle(
+                                                        color: model.bluecolor),
+                                                  ),
+                                                  children: [
+                                                    const Center(
+                                                        child: Text(
+                                                            textAlign:
+                                                                TextAlign.start,
+                                                            "You want to  delete account")),
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment.end,
+                                                      children: [
+                                                        TextButton(
                                                             onPressed: () {
                                                               Navigator.pop(
                                                                   context);
@@ -293,213 +407,106 @@ class _firstState extends State<first> {
                                                               "CANCEL",
                                                               style: TextStyle(
                                                                   color: model
-                                                                      .bluecolor),
+                                                                      .orangeColor),
                                                             )),
-                                                        //TODO update data
                                                         TextButton(
-                                                            style: TextButton.styleFrom(
-                                                                foregroundColor:
-                                                                    model
-                                                                        .whiteColor,
-                                                                backgroundColor:
-                                                                    model
-                                                                        .bluecolor,
-                                                                fixedSize: Size(
-                                                                    120, 35),
-                                                                side: BorderSide(
-                                                                    color: model
-                                                                        .bluecolor),
-                                                                shape: RoundedRectangleBorder(
-                                                                    borderRadius:
-                                                                        BorderRadius.all(Radius.circular(
-                                                                            40)))),
-                                                            onPressed:
-                                                                () async {
-                                                              // editingController.text=model.t1.text;
+                                                            onPressed: () async {
                                                               var url = Uri.parse(
-                                                                  'https://pdfile7.000webhostapp.com/ac_management/updatedata.php?id=${cl.id}&name=${editingController.text}');
+                                                                  'https://pdfile7.000webhostapp.com/ac_management/deletedata.php?id=${cl.id}');
                                                               var response =
                                                                   await http
                                                                       .get(url);
-                                                              print(
-                                                                  "response = ${response.body}");
-                                                              // editingController.clear();
+                                                              log("response = ${response.body}");
                                                               if (response.body
                                                                       .trim() ==
-                                                                  "Data is Update") {
+                                                                  "Delete Data") {
                                                                 Navigator
                                                                     .pushReplacement(
                                                                         context,
                                                                         MaterialPageRoute(
-                                                                  builder:
-                                                                      (context) {
-                                                                    return first();
-                                                                  },
-                                                                ));
+                                                                          builder:
+                                                                              (context) =>
+                                                                                  const First(),
+                                                                        ));
                                                               }
                                                             },
                                                             child: Text(
-                                                              "UPDATE",
+                                                              "DELETE",
                                                               style: TextStyle(
                                                                   color: model
-                                                                      .whiteColor),
+                                                                      .orangeColor),
                                                             )),
                                                       ],
-                                                    ),
-                                                  ]),
-                                                ),
-                                              );
-                                            },
-                                          );
-                                        },
-                                        icon: ImageIcon(
-                                            size: 25,
-                                            AssetImage("image/update.png"),
-                                            color: model.bluecolor),
-                                      ),
-                                    ),
-                                    Container(
-                                      height: 37,
-                                      width: 37,
-                                      margin: EdgeInsets.only(
-                                          top: 2, bottom: 2, left: 4, right: 5),
-                                      decoration: BoxDecoration(
-                                          border: Border.all(
-                                              color: Color(0xffE0E0E0),
-                                              width: 1.5),
-                                          borderRadius:
-                                              BorderRadius.circular(20)),
-                                      child: IconButton(
-                                        onPressed: () {
-                                          showDialog(
-                                            context: context,
-                                            builder: (context) {
-                                              return SimpleDialog(
-                                                title: Text(
-                                                  "Are you sure?",
-                                                  style: TextStyle(
-                                                      color: model.bluecolor),
-                                                ),
-                                                children: [
-                                                  Center(
-                                                      child: Text(
-                                                          textAlign:
-                                                              TextAlign.start,
-                                                          "You want to  delete account")),
-                                                  Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.end,
-                                                    children: [
-                                                      TextButton(
-                                                          onPressed: () {
-                                                            Navigator.pop(
-                                                                context);
-                                                          },
-                                                          child: Text(
-                                                            "CANCEL",
-                                                            style: TextStyle(
-                                                                color: model
-                                                                    .orangeColor),
-                                                          )),
-                                                      TextButton(
-                                                          onPressed: () async {
-                                                            var url = Uri.parse(
-                                                                'https://pdfile7.000webhostapp.com/ac_management/deletedata.php?id=${cl.id}');
-                                                            var response =
-                                                                await http
-                                                                    .get(url);
-                                                            print(
-                                                                "response = ${response.body}");
-                                                            if (response.body
-                                                                    .trim() ==
-                                                                "Delete Data") {
-                                                              Navigator
-                                                                  .pushReplacement(
-                                                                      context,
-                                                                      MaterialPageRoute(
-                                                                        builder:
-                                                                            (context) =>
-                                                                                first(),
-                                                                      ));
-                                                            }
-                                                          },
-                                                          child: Text(
-                                                            "DELETE",
-                                                            style: TextStyle(
-                                                                color: model
-                                                                    .orangeColor),
-                                                          )),
-                                                    ],
-                                                  )
-                                                ],
-                                              );
-                                            },
-                                          );
-                                        },
-                                        icon: ImageIcon(
-                                            size: 25,
-                                            AssetImage("image/delete.png"),
-                                            color: model.bluecolor),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  children: [
-                                    Container(
-                                      height: 70,
-                                      width: 105,
-                                      child: Center(
-                                        child: Text(
-                                          "Credit(↑)\n₹",
-                                          textAlign: TextAlign.center,
+                                                    )
+                                                  ],
+                                                );
+                                              },
+                                            );
+                                          },
+                                          icon: ImageIcon(
+                                              size: 25,
+                                              const AssetImage("image/delete.png"),
+                                              color: model.bluecolor),
                                         ),
                                       ),
-                                      decoration: BoxDecoration(
-                                          color: Color(0xfff8f3f7),
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(8))),
-                                    ),
-                                    Container(
-                                      height: 70,
-                                      width: 105,
-                                      child: Center(
-                                        child: Text(
-                                          "Debit(↓)\n₹0",
-                                          textAlign: TextAlign.center,
-                                        ),
-                                      ),
-                                      decoration: BoxDecoration(
-                                          color: Color(0xffe5e3e6),
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(8))),
-                                    ),
-                                    Container(
-                                      height: 70,
-                                      width: 105,
-                                      child: Center(
+                                    ],
+                                  ),
+                                  const SizedBox(height: 10,),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Container(
+                                        height: 50,
+                                        width: 105,
+                                        decoration: const BoxDecoration(
+                                            color: Color(0xfff8f3f7),
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(8))),
+                                        child: const Center(
                                           child: Text(
-                                        "Balance\n₹0",
-                                        textAlign: TextAlign.center,
-                                        style:
-                                            TextStyle(color: model.whiteColor),
-                                      )),
-                                      decoration: BoxDecoration(
-                                          color: model.bluecolor,
-                                          // border: Border.all(color: Colors.cyan),
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(8))),
-                                    ),
-                                  ],
-                                )
-                              ]),
+                                            "Credit(↑)\n₹",
+                                            textAlign: TextAlign.center,
+                                          ),
+                                        ),
+                                      ),
+                                      Container(
+                                        height: 50,
+                                        width: 105,
+                                        decoration: const BoxDecoration(
+                                            color: Color(0xffe5e3e6),
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(8))),
+                                        child: const Center(
+                                          child: Text(
+                                            "Debit(↓)\n₹0",
+                                            textAlign: TextAlign.center,
+                                          ),
+                                        ),
+                                      ),
+                                      Container(
+                                        height: 50,
+                                        width: 105,
+                                        decoration: BoxDecoration(
+                                            color: model.bluecolor,
+                                            // border: Border.all(color: Colors.cyan),
+                                            borderRadius: const BorderRadius.all(
+                                                Radius.circular(8))),
+                                        child: Center(
+                                            child: Text(
+                                          "Balance\n₹0",
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(color: model.whiteColor),
+                                        )),
+                                      ),
+                                    ],
+                                  )
+                                ]),
+                              ),
                             ),
                           );
                         },
                       ),
-                    );
+                  );
             } else {
               return Center(
                 child: CircularProgressIndicator(
@@ -545,7 +552,7 @@ class _firstState extends State<first> {
                     labelStyle: TextStyle(color: model.orangeColor),
                     fillColor: model.orangeColor),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Row(
@@ -554,9 +561,9 @@ class _firstState extends State<first> {
                   TextButton(
                       style: TextButton.styleFrom(
                           foregroundColor: model.bluecolor,
-                          fixedSize: Size(120, 35),
+                          fixedSize: const Size(120, 35),
                           side: BorderSide(color: model.bluecolor),
-                          shape: RoundedRectangleBorder(
+                          shape: const RoundedRectangleBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(40)))),
                       onPressed: () {
@@ -572,9 +579,9 @@ class _firstState extends State<first> {
                       style: TextButton.styleFrom(
                           foregroundColor: model.whiteColor,
                           backgroundColor: model.bluecolor,
-                          fixedSize: Size(120, 35),
+                          fixedSize: const Size(120, 35),
                           side: BorderSide(color: model.bluecolor),
-                          shape: RoundedRectangleBorder(
+                          shape: const RoundedRectangleBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(40)))),
                       onPressed: () async {
@@ -583,12 +590,12 @@ class _firstState extends State<first> {
                         var url = Uri.parse(
                             'https://pdfile7.000webhostapp.com/ac_management/insertdata.php?name=$name');
                         var response = await http.get(url);
-                        print("response = ${response.body}");
+                        log("response = ${response.body}");
                         model.t1.clear();
                         if (response.body.trim() == "data insert") {
                           Navigator.pushReplacement(context, MaterialPageRoute(
                             builder: (context) {
-                              return first();
+                              return const First();
                             },
                           ));
                         }

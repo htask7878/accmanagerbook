@@ -4,7 +4,7 @@ import 'page/splashscreen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(MaterialApp(
-    home: splashscreen(),
+  runApp(const MaterialApp(
+    home:Splashscreen(),
   ));
 }

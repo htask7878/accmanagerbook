@@ -4,20 +4,20 @@ import 'package:flutter/material.dart';
 import 'first.dart';
 
 
-class splashscreen extends StatefulWidget {
-  const splashscreen({Key? key}) : super(key: key);
+class Splashscreen extends StatefulWidget {
+  const Splashscreen({Key? key}) : super(key: key);
 
   @override
-  State<splashscreen> createState() => _splashscreenState();
+  State<Splashscreen> createState() => _SplashscreenState();
 }
 
-class _splashscreenState extends State<splashscreen> {
+class _SplashscreenState extends State<Splashscreen> {
   wait() async {
-    await Future.delayed(Duration(seconds: 3));
+    await Future.delayed(const Duration(seconds: 3));
     Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => first(),
+          builder: (context) => const First(),
         ));
   }
 
@@ -33,14 +33,15 @@ class _splashscreenState extends State<splashscreen> {
     return Scaffold(
       body: SafeArea(
           top: true,
+          bottom: true,
           child:ColoredBox(
-            child: Center(
+            color: model.bluecolor,
+            child: const Center(
                 child: Icon(
               Icons.book,
               color: Colors.white,
                   size: 80,
             )),
-            color: model.bluecolor,
           )),
     );
   }

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:accmanagerbook/model.dart';
 
@@ -10,7 +11,7 @@ insertdata() async {
   var url = Uri.parse(
       'https://pdfile7.000webhostapp.com/ac_management/insertdata.php?name=$name');
   var response = await http.get(url);
-  print("response = ${response.body}");
+  log("response = ${response.body}");
 
   model.t1.clear();
 }
@@ -22,14 +23,14 @@ Future viewdata1() async {
   var url =
       Uri.parse('https://pdfile7.000webhostapp.com/ac_management/viewdata1.php');
   var response = await http.get(url);
-  print("response = ${response.body}");
+  log("response = ${response.body}");
   return model.map = jsonDecode(response.body);
 }
  viewJoInData() async {
   var url =
   Uri.parse('https://pdfile7.000webhostapp.com/ac_management/viewjoindata.php');
   var response = await http.get(url);
-  print("response = ${response.body}");
+  log("response = ${response.body}");
   return model.map = jsonDecode(response.body);
 }
 
@@ -37,7 +38,7 @@ deleteData() async {
   var url = Uri.parse(
       'https://pdfile7.000webhostapp.com/ac_management/deletedata.php?id=');
   var response = await http.get(url);
-  print("response = ${response.body}");
+  log("response = ${response.body}");
   if (response.body == "Delete Data") {
     viewdata1();
   }
